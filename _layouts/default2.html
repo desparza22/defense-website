@@ -89,28 +89,11 @@
         linkto: "https://www.reddit.com/r/comics/comments/or0b0x/russian_hack/" }
       ];
 
-      let buyButton = [
-	  { url: "assets/images/buy_buttons/buy.png" }
-	  { url: "assets/images/buy_buttons/white.png" }
-      ];
-
       function randomXKCD() {
 	  let i = Math.floor(Math.random() * data.length);
 	  let xkcd = data[i];
 	  let tag = '<a href="' + xkcd.linkto + '"><img src="' + xkcd.url + '" title="' + xkcd.mouseover + '" /></a>';
 	  return tag;
-      }
-
-      var whichLoad = 0;
-      function maybeBuyButton() {
-	  whichLoad = whichLoad + 1;
-	  let tag_start = '<p><img src="';
-	  let tag_end = '" /></p>';
-	  if(whichLoad % 3 == 0) {
-	      return tag_start + buyButton[0] + tag_end;
-	  } else {
-	      return tag_start + buyButton[1] + tag_end;
-	  }   
       }
       
     </script>
