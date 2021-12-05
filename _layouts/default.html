@@ -101,18 +101,21 @@
 	  return tag;
       }
 
-      var whichLoad = 0;
+      var randLoad = 0;
+      var loaded = 0;
       function maybeBuyButton() {
-	  whichLoad = whichLoad + 1;
+	  if(loaded == 0) {
+	      randLoad = Math.floot(Math.random() * data.length);
+	  }
+	  
 	  let tag_start = '<p><img src="';
-	  let tag_end = '" /></p>';
-	  if(whichLoad % 3 == 0) {
-	      console.log(buyButton[0].url);
+	  let tag_end = '" style="width:100px;height:50pm; /></p>';
+	  
+	  if(randLoad % 3 == loaded) {
 	      return tag_start + buyButton[0].url + tag_end;
 	  } else {
-	      console.log(buyButton[1].url);
 	      return tag_start + buyButton[1].url + tag_end;
-	  }   
+	  }
       }
       
     </script>
