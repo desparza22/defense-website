@@ -8,9 +8,18 @@ layout: default
     <div class="col-sm">
       <script type="text/javascript">
 	document.write(piPicture());
+	document.write(
+	    '<div class="row"><div class="column">' +
+		maybeBuyButton() +
+		'</div><div class="column">' +
+		maybeBuyButton() +
+		'</div><div class="column">' +
+		maybeBuyButton() +
+		'</div></div>'
+	);
+	/*document.write(maybeBuyButton());
 	document.write(maybeBuyButton());
-	document.write(maybeBuyButton());
-	document.write(maybeBuyButton());
+	document.write(maybeBuyButton());*/
       </script>
     </div>
   </div>
