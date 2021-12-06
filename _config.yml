@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "CSCI 331: Introduction to Computer Security, Fall 2021"
+title: "Cheap Raspberry Pi's!"
 
-repository: "williams-cs/cs331-f21-www"
+repository: "desparza22/desparza22.github.io"
 
 newline: >
   :
@@ -27,11 +27,9 @@ plugins:
 
 # A list of the pages to display in the navigation bar
 header_pages:
-  - index.md
-  - lectures.md
-  - assignments.md
-  - handouts.md
-  - help_hours.md
+  - Raspberry Pi's
+  - Bison Burgers
+  - Malware Protection Software
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
