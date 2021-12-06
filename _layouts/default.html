@@ -107,16 +107,17 @@
 	  if(loaded == 0) {
 	      randLoad = Math.floor(Math.random() * 100);
 	  }
-	  loaded = loaded + 1;
 	  
 	  let tag_start = '<p><img src="';
 	  let tag_end = '" style="width:100px;height:50px;" /></p>';
-	  
+	  var image_tag;
 	  if(randLoad % 3 == loaded) {
-	      return tag_start + buyButton[0].url + tag_end;
+	      image_tag = tag_start + buyButton[0].url + tag_end;
 	  } else {
-	      return tag_start + buyButton[1].url + tag_end;
+	      image_tag = tag_start + buyButton[1].url + tag_end;
 	  }
+	  loaded = loaded + 1;
+	  return image_tag;
       }
       
     </script>
