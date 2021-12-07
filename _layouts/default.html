@@ -73,9 +73,11 @@
 	      var after = getAfter(getAfter(document.cookie, code), code);
 	      document.cookie = before + code + term + code + after;
 	  } else {
+	      console.log("here 1 " + document.cookie);
 	      document.cookie = document.cookie + code + term + code;
+	      console.log("here 2 " + document.cookie);
 	  }
-	  console.log(document.cookie);
+	  console.log("here 3 " + document.cookie);
       }
       function cookieGet(code) {
 	  if(document.cookie.indexOf(code) == -1) {
