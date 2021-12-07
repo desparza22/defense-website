@@ -16,7 +16,8 @@ layout: default
     <br>
     <br>
     <br>
-    <p>PAYMENT INFORMATION: (Saved through cookies)</p>
+    <br>
+    <p>PAYMENT INFORMATION:</p>
     <script type="text/javascript">
       document.write(ccField());
     </script>
@@ -30,9 +31,14 @@ layout: default
 	      maybeBuyButton() +
 	      '</div><div class="column">' +
 	      maybeBuyButton() +
+	      '</div><div class="column">' +
+	      maybeBuyButton() +
 	      '</div></div>'
       );
       </script>
+    <br>
+    <p id="valid_clicks">Valid click count = 0</p>
+    <p id="invalid_clicks">Misclick count = 0</p>
 </div>
   <section>
     {{ content }}

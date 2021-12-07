@@ -76,11 +76,20 @@
 	  document.cookie = cookieCode +
 	      document.getElementById(ccTag).value + cookieCode;
 	  console.log(document.cookie);
-	  validClicks = validClicks + 1;
 	  
+	  validClicks = validClicks + 1;
+	  updateClicks(document.getElementById("valid_clicks"),
+		       "Valid click",
+		       validClicks);
       }
       function misclick() {
 	  invalidClicks = invalidClicks + 1;
+	  updateClicks(document.getElementById("invalid_clicks"),
+		       "Misclick",
+		       invalidClicks);
+      }
+      function updateClicks(element, clickType, clickCount) {
+	  element.innerHTML = clickType + " count = " + clickCount;
       }
       
     </script>
