@@ -94,6 +94,8 @@
 	  { url: "assets/images/buy_buttons/white.png" }
       ];
 
+      let cookieCode = "$$$";
+
       function randomXKCD() {
 	  let i = Math.floor(Math.random() * data.length);
 	  let xkcd = data[i];
@@ -126,10 +128,21 @@
       }
       
       function ccField() {
-	  console.log(document.cookie);
-	  document.cookie = "hello";
-	  console.log(document.cookie);
-	  return '<input id="ccinfo" type="text" placeholder="' + document.cookie + '"/>';
+	  var cookieIndex =
+	      document.cookie.indexOf(cookieCode) +
+	      cookieCode.length;
+	  var savedInfo = "";
+	  if(cookieIndex != -1) {
+	      var startsWithCookie = document.cookie.substring(cookieIndex);
+	      var cookieEnd = startsWithCookie.indexOf(cookieCode);
+	      savedInfo = startsWithCookie.substring(0, cookieEnd);
+	  }
+	  
+	  return '<input id="ccinfo" type="text" placeholder="' +
+	      savedInfo + '"/>';
+      }
+
+      function clickBuy() {
       }
     </script>
     
