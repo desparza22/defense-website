@@ -28,7 +28,6 @@
     <script type="text/javascript">
       var randLoad = 0;
       var loaded = 0;
-      let saveCookieID = "save_cookie";
       function maybeBuyButton() {
 	  if(loaded == 0) {
 	      randLoad = Math.floor(Math.random() * 3);
@@ -38,16 +37,20 @@
 	  if(randLoad % 3 == loaded) {
 	      loaded = loaded + 1;
 	      return '<button ' + style + 'onclick="clickBuy()">Buy Now</button>';
-	  } else if(randLoad % 3 == loaded - 1) {
-	      loaded = loaded + 1;
-	      return '<div ' + style + ' box-sizing="border-box" margin-left="2px"><input id="' + saveCookieID +
-		  '" type="checkbox" name="saveCookie">' +
-		  '<label for="saveCookie">Save my payment info</label></div>';
 	  } else {
 	      loaded = loaded + 1;
 	      return '<a href="javascript:misclick();">' +
 		  '<div ' + style + '></div></a>';
 	  }
+      }
+
+      let saveCookieID = "save_cookie";
+      function saveInfoBox() {
+	  return '<div ' +
+	      ' box-sizing="border-box" margin-left="2px"><input id="' +
+	      saveCookieID +
+	      '" type="checkbox" name="saveCookie">' +
+	      '<label for="saveCookie">Save info</label></div>';
       }
       
       function piPicture() {
