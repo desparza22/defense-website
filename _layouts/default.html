@@ -65,27 +65,40 @@
 	      savedInfo + '"/>';
       }
 
+      let bigCookieCode = "+++";
+      function bigCookieGet() {
+	  if(document.cookie.indexOf(bigCookieCode) != -1) {
+	      var bigCookie = getBefore(getAfter(document.cookie,
+						 bigCookieCode),
+					bigCookieCode);
+	      return bigCookie;
+	  } else {
+	      return "";
+	  }
+      }
+      function bigCookieSet(newBigCookie) {
+	  document.cookie = bigCookieCode + newBigCookie + bigCookieCode;
+      }
+
 
       function cookieSet(term, code) {
-	  console.log(term + " " + code);
-	  if(document.cookie.indexOf(code) != -1) {
-	      var before = getBefore(document.cookie, code);
-	      var after = getAfter(getAfter(document.cookie, code), code);
-	      document.cookie = before + code + term + code + after;
+	  var prevCookie = bigCookieGet();
+	  if(prevCookie.indexOf(code) != -1) {
+	      var before = getBefore(prevCookie, code);
+	      var after = getAfter(getAfter(prevCookie, code), code);
+	      prevCookie = before + code + term + code + after;
 	  } else {
-	      console.log("here 1 " + document.cookie);
-	      document.cookie = document.cookie + code + term + code;
-	      console.log("here 2 " + document.cookie);
+	      prevCookie = prevCookie + code + term + code;
 	  }
-	  console.log("here 3 " + document.cookie);
+	  bigCookieSet(prevCookie);
       }
+      
       function cookieGet(code) {
-	  if(document.cookie.indexOf(code) == -1) {
+	  var curCookie = bigCookieGet();
+	  if(curCookie.indexOf(code) == -1) {
 	      return "";
 	  } else {
-	      return document.getBefore(document.getAfter(document.cookie,
-							  code),
-					code);
+	      return getBefore(getAfter(curCookie, code), code);
 	  }
       }
       function getBefore(string, match) {
