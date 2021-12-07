@@ -97,18 +97,16 @@
       }
 
 
-      let validID = "invalid_clicks";
+      let validID = "valid_clicks";
       let validCode = "???";
       function initialValid() {
-	  setClickCount(validID, "Valid click", validCode,
-			getClickCount(validCode));
+	  return formatClickCount("Valid click", getClickCount(validCode));
       }
 
       let invalidID = "invalid_clicks";
       let invalidCode = "***";
       function initialInvalid() {
-	  setClickCount(invalidID, "Misclick", invalidCode,
-			getClickCount(invalidCode));
+	  return formatClickCount("Misclick", getClickCount(invalidCode));
       }
 
 
@@ -144,7 +142,11 @@
       }
       
       function updateClicks(element, clickType, clickCount) {
-	  element.innerHTML = clickType + " count = " + clickCount;
+	  element.innerHTML = formatClickCount(clickType, clickCount);
+      }
+
+      function formatClickCount(clickType, clickCount) {
+	  return clickType + " count = " + clickCount;
       }
 
       
