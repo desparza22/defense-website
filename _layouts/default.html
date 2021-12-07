@@ -130,7 +130,7 @@
       function incrementClicks(id, click_type, code) {
 	  var clickCount = getClickCount(code);
 	  clickCount = clickCount + 1;
-	  setClickCount(id, code, clickCount);
+	  setClickCount(id, click_type, code, clickCount);
       }
 
       function getClickCount(code) {
