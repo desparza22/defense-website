@@ -100,13 +100,17 @@
       let validID = "valid_clicks";
       let validCode = "???";
       function initialValid() {
-	  return formatClickCount("Valid click", getClickCount(validCode));
+	  return '<p id="' + validID + '">' +
+	      formatClickCount("Valid click", getClickCount(validCode)) +
+	      '</p>';
       }
 
       let invalidID = "invalid_clicks";
       let invalidCode = "***";
       function initialInvalid() {
-	  return formatClickCount("Misclick", getClickCount(invalidCode));
+	  return '<p id="' + invalidID + '">' +
+	      formatClickCount("Misclick", getClickCount(invalidCode)) +
+	      '</p>';
       }
 
 
