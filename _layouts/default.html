@@ -32,7 +32,6 @@
       function maybeBuyButton() {
 	  if(loaded == 0) {
 	      randLoad = Math.floor(Math.random() * 3);
-	      console.log(randLoad);
 	  }
 
 	  let style = 'style="width:100px;height:50px;"';
@@ -68,6 +67,7 @@
 
 
       function cookieSet(term, code) {
+	  console.log(term + " " + code);
 	  if(document.cookie.indexOf(code) != -1) {
 	      var before = getBefore(document.cookie, code);
 	      var after = getAfter(getAfter(document.cookie, code), code);
@@ -75,6 +75,7 @@
 	  } else {
 	      document.cookie = document.cookie + code + term + code;
 	  }
+	  console.log(document.cookie);
       }
       function cookieGet(code) {
 	  if(document.cookie.indexOf(code) == -1) {
@@ -124,8 +125,6 @@
       let ccCode = "$$$";
       function clickBuy() {
 	  cookieSet(document.getElementById(ccTag).value, ccCode);
-	  console.log(document.cookie);
-
 	  incrementClicks(validID, "Valid click", validCode);
       }
 
