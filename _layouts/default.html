@@ -34,13 +34,13 @@
 	      randLoad = Math.floor(Math.random() * 3);
 	  }
 
-	  let style = 'style="width:180px;height:50px;"';
+	  let style = 'style="width:140px;height:50px;"';
 	  if(randLoad % 3 == loaded) {
 	      loaded = loaded + 1;
 	      return '<button ' + style + 'onclick="clickBuy()">Buy Now</button>';
 	  } else if(randLoad % 3 == loaded - 1) {
 	      loaded = loaded + 1;
-	      return '<div ' + style + '><input id="' + saveCookieID +
+	      return '<div ' + style + ' box-sizing="border-box"><input id="' + saveCookieID +
 		  '" type="checkbox" name="saveCookie">' +
 		  '<label for="saveCookie">Save my payment info</label></div>';
 	  } else {
