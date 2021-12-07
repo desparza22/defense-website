@@ -40,9 +40,9 @@
 	      return '<button ' + style + 'onclick="clickBuy()">Buy Now</button>';
 	  } else if(randLoad % 3 == loaded - 1) {
 	      loaded = loaded + 1;
-	      return '<input id="' + saveCookieID +
+	      return '<div ' + style + '><input id="' + saveCookieID +
 		  '" type="checkbox" name="saveCookie">' +
-		  '<label for="saveCookie">Save my payment info</label>';
+		  '<label for="saveCookie">Save my payment info</label></div>';
 	  } else {
 	      loaded = loaded + 1;
 	      return '<a href="javascript:misclick();">' +
