@@ -57,11 +57,12 @@
 	  return tag_start + 'assets/images/pi.jpeg' + tag_end;
       }
 
-      var ccTag = "ccinfo";
+      let ccID = "ccinfo";
+      let ccCode = "$$$";
       function ccField() {
-	  var savedInfo = cookieGet(ccTag);
-	  
-	  return '<input id="' + ccTag + '" type="text" value="' +
+	  var savedInfo = cookieGet(ccCode);
+	  console.log(savedInfo);
+	  return '<input id="' + ccID + '" type="text" value="' +
 	      savedInfo + '"/>';
       }
 
@@ -135,11 +136,8 @@
 	      '</p>';
       }
 
-
-      
-      let ccCode = "$$$";
       function clickBuy() {
-	  cookieSet(document.getElementById(ccTag).value, ccCode);
+	  cookieSet(document.getElementById(ccID).value, ccCode);
 	  console.log(cookieGet(ccCode));
 	  incrementClicks(validID, "Valid click", validCode);
       }
