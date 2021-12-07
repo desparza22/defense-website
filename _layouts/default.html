@@ -73,7 +73,8 @@
       var invalidClicks = 0;
       var validClicks = 0;
       function clickBuy() {
-	  document.cookie = document.getElementById(ccTag).value;
+	  document.cookie = cookieCode +
+	      document.getElementById(ccTag).value + cookieCode;
 	  console.log(document.cookie);
 	  validClicks = validClicks + 1;
 	  
