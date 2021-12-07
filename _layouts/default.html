@@ -26,8 +26,6 @@
     </script>
 	  
     <script type="text/javascript">
-      let cookieCode = "$$$";
-
       var randLoad = 0;
       var loaded = 0;
       function maybeBuyButton() {
@@ -56,41 +54,99 @@
 
       var ccTag = "ccinfo";
       function ccField() {
-	  var cookieIndex =
-	      document.cookie.indexOf(cookieCode) +
-	      cookieCode.length;
-	  var savedInfo = "";
-	  if(cookieIndex != -1) {
-	      var startsWithCookie = document.cookie.substring(cookieIndex);
-	      var cookieEnd = startsWithCookie.indexOf(cookieCode);
-	      savedInfo = startsWithCookie.substring(0, cookieEnd);
-	  }
+	  var savedInfo = cookieGet(ccTag);
 	  
-	  return '<input id="' + ccTag + '" type="text" placeholder="' +
+	  return '<input id="' + ccTag + '" type="text" value="' +
 	      savedInfo + '"/>';
       }
 
-      var invalidClicks = 0;
-      var validClicks = 0;
+
+      function cookieSet(term, code) {
+	  if(document.cookie.indexOf(code) != -1) {
+	      var before = getBefore(document.cookie, code);
+	      var after = getAfter(getAfter(document.cookie, code), code);
+	      document.cookie = before + code + term + code + after;
+	  } else {
+	      document.cookie = document.cookie + code + term + code;
+	  }
+      }
+      function cookieGet(code) {
+	  if(document.cookie.indexOf(code) == -1) {
+	      return "";
+	  } else {
+	      return document.getBefore(document.getAfter(document.cookie,
+							  code),
+					code);
+	  }
+      }
+      function getBefore(string, match) {
+	  var index_of = string.indexOf(match);
+	  if(index_of != -1) {
+	      return string.substring(0, index_of);
+	  } else {
+	      return string;
+	  }
+      }
+      function getAfter(string, match) {
+	  var index_of = string.indexOf(match);
+	  if(index_of != -1) {
+	      return string.substring(index_of + match.length);
+	  } else {
+	      return string;
+	  }
+      }
+
+
+      let validID = "invalid_clicks";
+      let validCode = "???";
+      function initialValid() {
+	  setClickCount(validID, "Valid click", validCode,
+			getClickCount(validCode));
+      }
+
+      let invalidID = "invalid_clicks";
+      let invalidCode = "***";
+      function initialInvalid() {
+	  setClickCount(invalidID, "Misclick", invalidCode,
+			getClickCount(invalidCode));
+      }
+
+
+      
+      let ccCode = "$$$";
       function clickBuy() {
-	  document.cookie = cookieCode +
-	      document.getElementById(ccTag).value + cookieCode;
+	  cookieSet(document.getElementById(ccTag).value, ccCode);
 	  console.log(document.cookie);
-	  
-	  validClicks = validClicks + 1;
-	  updateClicks(document.getElementById("valid_clicks"),
-		       "Valid click",
-		       validClicks);
+
+	  incrementClicks(validID, "Valid click", validCode);
       }
+
       function misclick() {
-	  invalidClicks = invalidClicks + 1;
-	  updateClicks(document.getElementById("invalid_clicks"),
-		       "Misclick",
-		       invalidClicks);
+	  incrementClicks(invalidID, "Misclick", invalidCode);
       }
+
+      function incrementClicks(id, click_type, code) {
+	  var clickCount = getClickCount(code);
+	  clickCount = clickCount + 1;
+	  setClickCount(id, code, clickCount);
+      }
+
+      function getClickCount(code) {
+	  var strClickCount = cookieGet(code);
+	  if(strClickCount.length == 0) {
+	      strClickCount = "0";
+	  }
+	  return parseInt(strClickCount);
+      }
+      function setClickCount(id, click_type, code, count) {
+	  cookieSet(count.toString(), code);
+	  updateClicks(document.getElementById(id), click_type, count);
+      }
+      
       function updateClicks(element, clickType, clickCount) {
 	  element.innerHTML = clickType + " count = " + clickCount;
       }
+
       
     </script>
     
