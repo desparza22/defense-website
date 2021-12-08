@@ -139,12 +139,15 @@
 	      '</p>';
       }
 
+      let purchase_count_id = "purchase_count_id";
       function recentPurchases() {
 	  var purchase_count = getClickCount(validCode);
 	  if(purchase_count == 0) {
-	      return '<p>No purchases made.</p>';
+	      return '<p id="' + purchase_count_id +
+		  '">No purchases made.</p>';
 	  } else {
-	      return '<p>Raspberry Pi Zero 2 W. Qty. ' +
+	      return '<p id="' + purchase_count_id +
+		  '">Raspberry Pi Zero 2 W. Qty. ' +
 		  purchase_count.toString() +
 		  '</p>';
 	  }
@@ -156,6 +159,9 @@
 	  }
 	  
 	  incrementClicks(validID, "Valid click", validCode);
+	  document.getElementById(purchase_count_id).innerHTML =
+	      "Raspberry Pi Zero 2 W. Qty. " +
+		  purchase_count.toString();
       }
 
       function misclick() {
