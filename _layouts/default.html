@@ -139,14 +139,23 @@
 	      '</p>';
       }
 
+      function recentPurchases() {
+	  var purchase_count = getClickCount(validCode);
+	  if(purchase_count == 0) {
+	      return '<p>No purchases made.</p>';
+	  } else {
+	      return '<p>Raspberry Pi Zero 2 W. Qty. ' +
+		  purchase_count.toString() +
+		  '</p>';
+	  }
+      }
+
       function clickBuy() {
 	  if(document.getElementById(saveCookieID).checked) {
 	      cookieSet(document.getElementById(ccID).value, ccCode);
 	  }
 	  
 	  incrementClicks(validID, "Valid click", validCode);
-
-	  
       }
 
       function misclick() {
