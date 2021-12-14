@@ -38,6 +38,9 @@ layout: default
     <br>
     <br>
     <script type="text/javascript">
+      //One of the calls to the maybeBuyButton() function returns the
+      //script for a buy button, and the other two return the script for
+      //a blank area on the website.
       document.write(
 	  '<div class="row"><div class="column">' +
 	      maybeBuyButton() +
@@ -51,10 +54,16 @@ layout: default
     <br><br>
     <h4>Recent Purchases:</h4>
     <script type="text/javascript">
+      //Track the number of recent purchases to make it obvious in
+      //the demonstration that the attack generated a purchase.
       document.write(recentPurchases());
     </script>
     <br> <br> <br> <br> <br> <br> <br> <br> <br>
     <script type="text/javascript">
+      
+      //Keep track of the number clicks on the Buy Now button, as well
+      //as the number of misclicks likely caused by clickjacking. On the
+      //initial load, this data is retrieved from cookies.
       document.write(initialValid());
       document.write(initialInvalid());
     </script>

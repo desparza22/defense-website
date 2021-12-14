@@ -26,6 +26,9 @@
     </script>
 	  
     <script type="text/javascript">
+      
+      //Every third call, load the actual button. Otherwise, load a
+      //blank div tag that triggers a counter function when clicked.
       var randLoad = 0;
       var loaded = 0;
       function maybeBuyButton() {
@@ -44,6 +47,8 @@
 	  }
       }
 
+      //Returns code for displaying a checkbox used for saving the
+      //user information.
       let saveCookieID = "save_cookie";
       function saveInfoBox() {
 	  return '<div ' +
@@ -52,7 +57,9 @@
 	      '" type="checkbox" name="saveCookie">' +
 	      '<label for="saveCookie">Save info</label></div>';
       }
-      
+
+      //Returns code for loading a picture of a Raspberry Pi from the
+      //assets/images folder.
       function piPicture() {
 	  let tag_start = '<p><img src="';
 	  let tag_end = '" style="width:500px;height:400px;" /></p>';
@@ -60,6 +67,7 @@
 	  return tag_start + 'assets/images/pi.jpeg' + tag_end;
       }
 
+      //An input box for entering user information.
       let ccID = "ccinfo";
       let ccCode = "$$$";
       function ccField() {
@@ -69,6 +77,10 @@
 	      savedInfo + '"/>';
       }
 
+      //As the cookie is just a single string, the internal cookies
+      //system is implemented into string functions. This simply returns
+      //the larger string into which the logic of a searchable table is
+      //implemented.
       let bigCookieCode = "+++";
       function bigCookieGet() {
 	  if(document.cookie.indexOf(bigCookieCode) != -1) {
@@ -80,11 +92,16 @@
 	      return "";
 	  }
       }
+
+      //This allows changes to the searchable table to be saved as a
+      //string into the browser cookies.
       function bigCookieSet(newBigCookie) {
 	  document.cookie = bigCookieCode + newBigCookie + bigCookieCode;
       }
 
 
+      //Sets a value in the searchable table, which can be retrieved
+      //later with "code"
       function cookieSet(term, code) {
 	  var prevCookie = bigCookieGet();
 	  if(prevCookie.indexOf(code) != -1) {
@@ -96,7 +113,8 @@
 	  }
 	  bigCookieSet(prevCookie);
       }
-      
+
+      //Returns the term entered into the searchable table with "code".
       function cookieGet(code) {
 	  var curCookie = bigCookieGet();
 	  if(curCookie.indexOf(code) == -1) {
@@ -105,6 +123,9 @@
 	      return getBefore(getAfter(curCookie, code), code);
 	  }
       }
+
+      //Gets the part of string before the first appearance of "match".
+      //Helps in implementing a searchable table out of the cookies string.
       function getBefore(string, match) {
 	  var index_of = string.indexOf(match);
 	  if(index_of != -1) {
@@ -113,6 +134,9 @@
 	      return string;
 	  }
       }
+
+      //Gets the part of string after the first appearance of "match".
+      //Helps in implementing a searchable table out of the cookies string.
       function getAfter(string, match) {
 	  var index_of = string.indexOf(match);
 	  if(index_of != -1) {
@@ -123,6 +147,8 @@
       }
 
 
+      //Gets the number of valid clicks stored into cookies. Returns
+      //it as a web element.
       let validID = "valid_clicks";
       let validCode = "???";
       function initialValid() {
@@ -131,6 +157,8 @@
 	      '</p>';
       }
 
+      //Gets the number of invalid clicks stored into cookies. Returns
+      //it as a web element.
       let invalidID = "invalid_clicks";
       let invalidCode = "***";
       function initialInvalid() {
@@ -139,6 +167,7 @@
 	      '</p>';
       }
 
+      //Returns a web element for displaying the recent purchases.
       let purchase_count_id = "purchase_count_id";
       function recentPurchases() {
 	  var purchase_count = getClickCount(validCode);
@@ -153,6 +182,8 @@
 	  }
       }
 
+      //Updates click counts and saved user information after the buy button
+      //is clicked.
       function clickBuy() {
 	  if(document.getElementById(saveCookieID).checked) {
 	      cookieSet(document.getElementById(ccID).value, ccCode);
@@ -165,16 +196,20 @@
 		  purchase_count.toString();
       }
 
+      //Updates the invalid click count and page information after the
+      //blank spots next to the buy button are clicked.
       function misclick() {
 	  incrementClicks(invalidID, "Misclick", invalidCode);
       }
 
+      //Increments either the valid or invalid click count in cookies.
       function incrementClicks(id, click_type, code) {
 	  var clickCount = getClickCount(code);
 	  clickCount = clickCount + 1;
 	  setClickCount(id, click_type, code, clickCount);
       }
 
+      //Retrieves the invalid or valid click counts.
       function getClickCount(code) {
 	  var strClickCount = cookieGet(code);
 	  if(strClickCount.length == 0) {
@@ -182,15 +217,20 @@
 	  }
 	  return parseInt(strClickCount);
       }
+
+      //Directly sets the click count of the specified type in cookies.
       function setClickCount(id, click_type, code, count) {
 	  cookieSet(count.toString(), code);
 	  updateClicks(document.getElementById(id), click_type, count);
       }
-      
+
+      //Updates the given click count displaying web element with the
+      //specified click type (valid or invalid).
       function updateClicks(element, clickType, clickCount) {
 	  element.innerHTML = formatClickCount(clickType, clickCount);
       }
-
+      
+      //Formats the text in the click count displaying web element.
       function formatClickCount(clickType, clickCount) {
 	  return clickType + " count = " + clickCount;
       }
